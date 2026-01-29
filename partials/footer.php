@@ -10,35 +10,35 @@
         <article>
             <h4>Categotries</h4>
             <ul>
-                <li><a href="">Wild Life</a></li>
-                <li><a href="">Music</a></li>
-                <li><a href="">Movies</a></li>
-                <li><a href="">Travel</a></li>
-                <li><a href="">Science & Technology</a></li>
-                <li><a href="">Food</a></li>
+                <li><a href="#wildlife">Wild Life</a></li>
+                <li><a href="#music">Music</a></li>
+                <li><a href="#movies">Movies</a></li>
+                <li><a href="#travel">Travel</a></li>
+                <li><a href="3science&technology">Science & Technology</a></li>
+                <li><a href="#food">Food</a></li>
             
             </ul>
         </article>
         <article>
             <h4>Support</h4>
             <ul>
-                <li><a href="">Online Support</a></li>
-                <li><a href="">Call Numbers</a></li>
-                <li><a href="">Emails</a></li>
-                <li><a href="">Social Support</a></li>
-                <li><a href="">Location</a></li>
-                <li><a href="">Food</a></li>
+                <li><a href="#online-support">Online Support</a></li>
+                <li><a href="#call-numbers">Call Numbers</a></li>
+                <li><a href="#emails">Emails</a></li>
+                <li><a href="#social-support">Social Support</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#food">Food</a></li>
             </ul>
         </article>
 
         <article>
             <h4>Blog</h4>
             <ul>
-                <li><a href="">Safety</a></li>
-                <li><a href="">Repair</a></li>
-                <li><a href="">Recent</a></li>
-                <li><a href="">Popular</a></li>
-                <li><a href="">Categories</a></li>
+                <li><a href="#safety">Safety</a></li>
+                <li><a href="#repair">Repair</a></li>
+                <li><a href="#recent">Recent</a></li>
+                <li><a href="#popular">Popular</a></li>
+                <li><a href="#categories">Categories</a></li>
             </ul>
         </article>
 
