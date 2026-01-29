@@ -8,49 +8,49 @@
     </div>
     <div class="container footer__container">
         <article>
-            <h4>Categotries</h4>
+            <h4>Categories</h4>
             <ul>
-                <li><a href="#wildlife">Wild Life</a></li>
-                <li><a href="#music">Music</a></li>
-                <li><a href="#movies">Movies</a></li>
-                <li><a href="#travel">Travel</a></li>
-                <li><a href="3science&technology">Science & Technology</a></li>
-                <li><a href="#food">Food</a></li>
-            
+                <?php 
+                $footer_categories_query = "SELECT * FROM categories LIMIT 6";
+                $footer_categories_result = mysqli_query($connection, $footer_categories_query);
+                while($category = mysqli_fetch_assoc($footer_categories_result)) : 
+                ?>
+                <li><a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>"><?= $category['title'] ?></a></li>
+                <?php endwhile ?>
             </ul>
         </article>
         <article>
             <h4>Support</h4>
             <ul>
-                <li><a href="#online-support">Online Support</a></li>
-                <li><a href="#call-numbers">Call Numbers</a></li>
-                <li><a href="#emails">Emails</a></li>
-                <li><a href="#social-support">Social Support</a></li>
-                <li><a href="#location">Location</a></li>
-                <li><a href="#food">Food</a></li>
+                <li><a href="<?= ROOT_URL ?>contact.php">Contact Us</a></li>
+                <li><a href="mailto:contact@underemployed.com">Email Support</a></li>
+                <li><a href="tel:+15551234567">Call Us</a></li>
+                <li><a href="<?= ROOT_URL ?>about.php">About Us</a></li>
+                <li><a href="<?= ROOT_URL ?>services.php">Our Services</a></li>
             </ul>
         </article>
 
         <article>
-            <h4>Blog</h4>
+            <h4>Quick Links</h4>
             <ul>
-                <li><a href="#safety">Safety</a></li>
-                <li><a href="#repair">Repair</a></li>
-                <li><a href="#recent">Recent</a></li>
-                <li><a href="#popular">Popular</a></li>
-                <li><a href="#categories">Categories</a></li>
+                <li><a href="<?= ROOT_URL ?>blog.php">All Posts</a></li>
+                <li><a href="<?= ROOT_URL ?>search.php">Search</a></li>
+                <li><a href="<?= ROOT_URL ?>signin.php">Sign In</a></li>
+                <li><a href="<?= ROOT_URL ?>signup.php">Sign Up</a></li>
+                <?php if(isset($_SESSION['user-id'])) : ?>
+                <li><a href="<?= ROOT_URL ?>admin/index.php">Dashboard</a></li>
+                <?php endif ?>
             </ul>
         </article>
 
         <article>
-            <h4>PermaLinks</h4>
+            <h4>Navigation</h4>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact</a></li>
-                
+                <li><a href="<?= ROOT_URL ?>index.php">Home</a></li>
+                <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>
+                <li><a href="<?= ROOT_URL ?>about.php">About</a></li>
+                <li><a href="<?= ROOT_URL ?>services.php">Services</a></li>
+                <li><a href="<?= ROOT_URL ?>contact.php">Contact</a></li>
             </ul>
         </article>
     </div>
@@ -59,7 +59,6 @@
         <small>Copyright &copy; UnderEmployed</small>
     </div>
   </footer>
-
 
 
   <script src="<?= ROOT_URL ?>js/main.js"></script>
