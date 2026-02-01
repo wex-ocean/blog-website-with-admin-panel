@@ -7,7 +7,7 @@ if(!isset($_SESSION['user_is_admin'])){
 }
 //fetch categories from database
 $query = "SELECT * FROM categories ORDER BY title";
-$categories=mysqli_query($connection,$query)
+$categories=mysqli_query($connection,$query);
 
 ?>
 

@@ -63,9 +63,12 @@ if(isset($_POST['submit'])){
             $zero_all_is_featured_query="UPDATE posts SET is_featured=0";
             $zero_all_is_featured_result=mysqli_query($connection,$zero_all_is_featured_query);
         }        
-        //insert post into database
-        $query="INSERT INTO posts (title, body, thumbnail, category_id, author_id, is_featured) VALUES ('$title', '$body', '$thumbnail_name', $category_id , $author_id, $is_featured)";
-        $result=mysqli_query($connection,$query);
+        //insert post into database using prepared statement
+        $query="INSERT INTO posts (title, body, thumbnail, category_id, author_id, is_featured) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "sssiii", $title, $body, $thumbnail_name, $category_id, $author_id, $is_featured);
+        $result = mysqli_stmt_execute($stmt);
+
         if(mysqli_errno($connection)){
             $_SESSION['add-post']="Failed to add post";
             header("location: " . ROOT_URL . 'admin/index.php');

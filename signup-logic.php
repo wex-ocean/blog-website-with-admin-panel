@@ -1,6 +1,5 @@
 <?php
 require "config/database.php";
-session_start();
 
 //get signup form data
 
@@ -35,8 +34,13 @@ if(isset($_POST["submit"])){
             
 
 
-            $user_check_query="SELECT * FROM users WHERE username='$username' OR email ='$email'";
-            $user_check_result = mysqli_query($connection, $user_check_query);
+            // Check if username or email already exists using prepared statement
+            $user_check_query = "SELECT * FROM users WHERE username=? OR email=?";
+            $stmt = mysqli_prepare($connection, $user_check_query);
+            mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+            mysqli_stmt_execute($stmt);
+            $user_check_result = mysqli_stmt_get_result($stmt);
+            
             if(mysqli_num_rows($user_check_result)>0){
                 $_SESSION['signup'] = "Username or Email already exists";
             }else{
@@ -78,12 +82,16 @@ if(isset($_POST["submit"])){
         die();
         
     }else{
-        //insert new user into users table
-        $inset_user_query = "INSERT INTO users SET firstname ='$firstname' ,lastname='$lastname',username='$username',email ='$email' ,password='$hashed_password',avatar='$avatar_name',is_admin=0";
-        $inset_user_result = mysqli_query($connection, $inset_user_query);
+        //insert new user into users table using prepared statement
+        $inset_user_query = "INSERT INTO users (firstname, lastname, username, email, password, avatar, is_admin) VALUES (?, ?, ?, ?, ?, ?, 0)";
+        $stmt = mysqli_prepare($connection, $inset_user_query);
+        mysqli_stmt_bind_param($stmt, "ssssss", $firstname, $lastname, $username, $email, $hashed_password, $avatar_name);
+        $inset_user_result = mysqli_stmt_execute($stmt);
+        
         if(!mysqli_errno($connection)){
             $_SESSION['signup-success'] = "Registration Successful Please login";
             header('location: ' . ROOT_URL . 'signin.php');
+            die();
 
         }
     }

@@ -15,9 +15,12 @@ if(isset($_POST['submit'])){
         $_SESSION['signin'] = 'Password required';
  
     }else{  
-        // fetch user from database
-        $fetch_user_query = "SELECT * FROM users WHERE username = '$username_email' OR email = '$username_email'";
-        $fetch_user_result = mysqli_query($connection, $fetch_user_query);
+        // fetch user from database using prepared statement
+        $fetch_user_query = "SELECT * FROM users WHERE username = ? OR email = ?";
+        $stmt = mysqli_prepare($connection, $fetch_user_query);
+        mysqli_stmt_bind_param($stmt, "ss", $username_email, $username_email);
+        mysqli_stmt_execute($stmt);
+        $fetch_user_result = mysqli_stmt_get_result($stmt);
 
         if(mysqli_num_rows($fetch_user_result) == 1){
             //convert the record into assoc array
@@ -38,13 +41,12 @@ if(isset($_POST['submit'])){
                 }
                 //log in user
                 header('location: ' . ROOT_URL . 'admin/index.php');
+                die();
                 
             }else{
                 $_SESSION['signin'] = "Please check your input";
             }
         }else{
-            $a = mysqli_num_rows($fetch_user_result);
-            echo mysqli_num_rows($fetch_user_result);
             $_SESSION['signin'] = "User Not found";
         }
     }
